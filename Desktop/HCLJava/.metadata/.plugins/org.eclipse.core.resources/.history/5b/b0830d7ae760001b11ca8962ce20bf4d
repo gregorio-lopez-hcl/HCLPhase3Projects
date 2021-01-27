@@ -1,0 +1,17 @@
+package src;
+
+//1. Class is having Default access modifier 
+class defAccessSpecifier
+{ 
+	void display() 
+   { 
+       System.out.println("You are using default access specifier"); 
+   } 
+	protected void display1() 
+	{ 
+		System.out.println("This is protected access specifier"); 
+	} 
+}
+
+
+
