@@ -10,6 +10,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+
+@SuppressWarnings("deprecation")
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
@@ -26,9 +28,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity h) throws Exception { 
 		h.authorizeRequests()
 			.antMatchers("/admin").hasRole("ADMIN")
-			.antMatchers("/user").hasAnyRole("USER")
+			.antMatchers("/user").hasAnyRole("ADMIN", "USER")
 			.antMatchers("/").permitAll()
-			.and().formLogin(); 
+			.and().formLogin() 
+			.defaultSuccessUrl("/user")
+			.permitAll();
 	}
 	
 	@Bean

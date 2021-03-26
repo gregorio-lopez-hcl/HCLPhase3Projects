@@ -8,14 +8,18 @@
 </head>
 <body>
 
+<blockquote class="imgur-embed-pub" lang="en" data-id="a/oFdLc"  ><a href="//imgur.com/a/oFdLc">Hello There!</a>
+</blockquote><script async src="//s.imgur.com/min/embed.js" charset="utf-8"></script>
+
 <h1>Welcome</h1>
 <h2>Please Choose an Option Below</h2>
 
-<a href = "login">User Login</a> <br> 
+<a href = "login">Login</a> <br> 
 
-<h3>Or</h3> <br> 
+<h3>Or</h3> 
 
-<
+<a href = "logout">Logout</a> <br>
+
 
 </body>
 </html>
