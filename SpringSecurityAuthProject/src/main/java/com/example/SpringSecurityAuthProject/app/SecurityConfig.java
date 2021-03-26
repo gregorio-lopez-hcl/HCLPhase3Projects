@@ -18,22 +18,30 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	UserDetailsService userDetailsService; 
 	
-	@Override 
-	protected void configure(AuthenticationManagerBuilder a) throws Exception { 
-		a.userDetailsService(userDetailsService);
-	}
+//	@Override 
+//	protected void configure(AuthenticationManagerBuilder a) throws Exception { 
+//		a.userDetailsService(userDetailsService);
+//	}
 	
+	@Override 
+	protected void configure(AuthenticationManagerBuilder a) throws Exception {
+		a.inMemoryAuthentication()
+		.withUser("bob")
+		.password("password")
+		.roles("USER"); 
+	}
 	
 	@Override 
 	protected void configure(HttpSecurity h) throws Exception { 
 		h.authorizeRequests()
-			.antMatchers("/admin").hasRole("ADMIN")
-			.antMatchers("/user").hasAnyRole("ADMIN", "USER")
-			.antMatchers("/").permitAll()
-			.and().formLogin() 
-			.defaultSuccessUrl("/user")
-			.permitAll();
-	}
+	          .antMatchers("/login").hasAnyRole("USER")
+	          .antMatchers("/").permitAll()
+	          .and().formLogin()
+	          .defaultSuccessUrl("/user", true)
+	          .permitAll()
+	          .and().logout()
+	          .logoutSuccessUrl("/");
+	        }
 	
 	@Bean
 	public PasswordEncoder getPasswordEncoder () { 

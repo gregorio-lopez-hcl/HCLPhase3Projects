@@ -1,9 +1,9 @@
 package com.example.SpringSecurityAuthProject.controllers;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
 
-@RestController
+@Controller
 public class ViewControllers {
 
 	@GetMapping("/")
@@ -13,11 +13,7 @@ public class ViewControllers {
 
 	@GetMapping("/user")
 	public String viewUserLogin () { 
-		return ("userlogin"); 
+		return ("<h3>Welcome User</h3>"); 
 	}
-
-	@GetMapping("/admin")
-	public String viewAdminLogin () { 
-		return "adminlogin" ; 
-	}
+	
 }
