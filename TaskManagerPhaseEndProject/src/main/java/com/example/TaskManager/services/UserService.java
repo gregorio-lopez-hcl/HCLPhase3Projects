@@ -1,5 +1,7 @@
 package com.example.TaskManager.services;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,24 +14,44 @@ public class UserService {
 	@Autowired
 	UserRepository userRepo;
 	
-	public String regNewUser(User user) {
-	    	
-		if (userRepo.save(user) != null){
-			return user.toString() + "/";
-		} else {
-			return "/error"; 
+	
+	public User getUserByName (String name) { 
+		User u = userRepo.findByName(name); 
+		return u; 
+	}
+	
+	public User getUserById (Integer id)  {
+		Optional<User> u = userRepo.findById(id);
+		
+		if(!u.isPresent()) {
+				throw new UserNotFoundException();
+				
+		}
+		
+		return (u.get());
+	}
+	
+	public void regNewUser(User user) {
+	    	userRepo.save(user);
+	}
+	
+	public boolean authUser(String name, String password) { 
+
+		User u = new  User(); 
+		u = userRepo.findByName(name); 
+		
+		
+		if(u.getName().equals(name) && u.getPassword().equals(password)) { 
+			
+			return true; 
+		}
+		else {
+			return false; 
 		}
 	}
 	
-	public String authUser(User user, String name, String password) { 
-
-		if(user.getName().equals(name) && user.getPassword().equals(password)) { 
-			
-			return "/userhome"; 
-		}
-		else {
-			return "/error"; 
-		}
+	public class UserNotFoundException extends RuntimeException { 
+		private static final long serialVersionUID = 1L; 
 	}
 	
 	

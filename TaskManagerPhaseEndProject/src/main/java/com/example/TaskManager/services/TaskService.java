@@ -1,7 +1,10 @@
 package com.example.TaskManager.services;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 
 import com.example.TaskManager.entities.Task;
 import com.example.TaskManager.entities.User;
@@ -24,15 +27,28 @@ public class TaskService {
 		return(taskRepo.findAllByUser(user));
 	}
 	
-	public Task addNewTask (Task task) {
+	public Task getTasksByID (Integer taskid){
 		
-		return taskRepo.save(task);
+		Optional<Task> task = taskRepo.findById(taskid);
+		
+		if (!task.isPresent()) {
+			throw new TaskNotFoundException();
+		}
+		
+		return (task.get());
+	}
+	
+	public void addNewTask (Task task) {
+		
+		taskRepo.save(task);
 	}
 	
 	public void deleteTask (Integer id) {
 		
 		taskRepo.deleteById(id);
 	}
-
 	
+	public class TaskNotFoundException extends RuntimeException { 
+		private static final long serialVersionUID = 1L; 
+	}
 }

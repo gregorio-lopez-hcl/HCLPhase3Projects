@@ -17,6 +17,7 @@
 
 <input type="submit" value="Login">
 	</form>
-
+	<br>
+<a href="/">Go Home</a>
 </body>
 </html>

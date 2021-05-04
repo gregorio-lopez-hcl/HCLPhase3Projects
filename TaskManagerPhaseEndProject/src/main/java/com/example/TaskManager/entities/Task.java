@@ -5,13 +5,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 import lombok.Data;
 
 import java.util.Date;
 
 @Entity
-
+@Table(name = "task")
 public class Task {
 
 
@@ -29,13 +30,13 @@ public class Task {
 	private User user;
 
 
-	public Task(String name, Date startDate, Date endDate, String severity, String description, User user) {
-		super();
+	public Task(String name, Date startDate, Date endDate, String severity, String desc, String email, User user) {
 		this.name = name;
 		this.startDate = startDate;
 		this.endDate = endDate;
 		this.severity = severity;
-		this.description = description;
+		this.description = desc;
+		this.email = email; 
 		this.user = user;
 	}
 
@@ -93,6 +94,10 @@ public class Task {
 
 	public String getEmail() {
 		return email;
+	}
+	
+	public void setEmail(String email) {
+		this.email = email; 
 	}
 
 	public User getUser() {
